@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Projects - Portfolio</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+      font-family: 'Poppins', sans-serif;
+    }
+
+    body {
+      background: rgb(241,241,241);
+      color: #333;
+      line-height: 1.6;
+    }
+
+    /* Header Styles */
+    .header {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      padding: 20px 8%;
+      background: rgba(0, 0, 0, 0.9);
+      display: flex;
+      backdrop-filter: blur(10px);
+      justify-content: space-between;
+      align-items: center;
+      z-index: 100;
+    }
+
+    .logo {
+      font-size: 22px;
+      color: white;
+      font-weight: 600;
+      transition: 0.3s ease;
+    }
+
+    .logo:hover {
+      color: orangered;
+      text-shadow: 0 0 25px orangered, 0 0 50px orangered;
+      transform: scale(1.1);
+    }
+
+    span {
+      color: orangered;
+    }
+
+    .navbar ul {
+      display: flex;
+      gap: 2em;
+      list-style: none;
+    }
+
+    .navbar a {
+      color: white;
+      text-decoration: none;
+      font-weight: 700;
+      font-size: 16px;
+      transition: all 0.3s ease;
+      padding: 6px 10px;
+    }
+
+    .navbar a:hover {
+      color: orangered;
+      background: linear-gradient(to right, white, orangered);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      transform: scale(1.1);
+    }
+
+    /* Projects Content */
+    .projects-container {
+      max-width: 1200px;
+      margin: 90px auto 40px;
+      padding: 20px;
+    }
+
+    .section-title {
+      text-align: center;
+      font-size: 28px;
+      margin-bottom: 35px;
+      color: #222;
+      position: relative;
+    }
+
+    .section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -8px;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 60px;
+      height: 3px;
+      background: linear-gradient(to right, orangered, black);
+      border-radius: 2px;
+    }
+
+    /* Projects Grid */
+    .projects-grid {
+      display: grid;
+      grid-template-columns: 1fr;
+      gap: 25px;
+    }
+
+    .project-card {
+      background: white;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .project-card:hover {
+      transform: translateY(-6px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+    }
+
+    .project-image {
+      width: 100%;
+      height: 200px;
+      overflow: hidden;
+      position: relative;
+      background: #f0f0f0;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .project-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.5s ease;
+    }
+
+    .project-card:hover .project-image img {
+      transform: scale(1.05);
+    }
+
+    .project-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+      display: flex;
+      align-items: flex-end;
+      padding: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .project-card:hover .project-overlay {
+      opacity: 1;
+    }
+
+    .project-tech {
+      color: white;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .project-content {
+      padding: 18px;
+    }
+
+    .project-title {
+      font-size: 18px;
+      color: #222;
+      margin-bottom: 8px;
+    }
+
+    .project-description {
+      color: #555;
+      margin-bottom: 15px;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .project-status {
+      display: inline-block;
+      padding: 4px 12px;
+      border-radius: 20px;
+      font-size: 11px;
+      font-weight: 600;
+      margin-bottom: 12px;
+    }
+
+    .status-completed {
+      background: rgba(76, 175, 80, 0.15);
+      color: #4CAF50;
+    }
+
+    .status-development {
+      background: rgba(33, 150, 243, 0.15);
+      color: #2196F3;
+    }
+
+    .status-upcoming {
+      background: rgba(158, 158, 158, 0.15);
+      color: #9E9E9E;
+    }
+
+    .project-btn {
+      display: inline-block;
+      padding: 8px 16px;
+      background: black;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-weight: 600;
+      text-decoration: none;
+      transition: all 0.3s ease;
+      cursor: pointer;
+      font-size: 14px;
+    }
+
+    .project-btn:hover {
+      background: orangered;
+      box-shadow: 0 0 10px rgba(255, 69, 0, 0.4);
+    }
+
+    .coming-soon {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      min-height: 150px;
+      background: #f9f9f9;
+      border: 2px dashed #ddd;
+      border-radius: 8px;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .coming-soon i {
+      font-size: 40px;
+      color: #ccc;
+      margin-bottom: 10px;
+    }
+
+    .coming-soon h3 {
+      color: #999;
+      margin-bottom: 8px;
+      font-size: 16px;
+    }
+
+    /* Footer Styles */
+    .footer {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      background: linear-gradient(to right, orangered, black);
+      color: white;
+      padding: 18px 10%;
+      font-size: 14px;
+      font-weight: 500;
+      letter-spacing: 1px;
+      margin-top: 40px;
+      text-align: center;
+    }
+
+    .footer-left {
+      margin-bottom: 10px;
+    }
+
+    .footer-left a {
+      margin: 0 10px;
+      color: white;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      font-size: 14px;
+    }
+
+    .footer-left a:hover {
+      color: #ffcc99;
+    }
+  </style>
+  <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+</head>
+<body>
+  <header class="header">
+    <a href="index.html" class="logo"><span>PORTFOLIO</span>website</a>
+    <nav class="navbar">
+      <ul>
+        <li><a href="portfolio.html">Home</a></li>
+        <li><a href="about.html">About Me</a></li>
+        <li><a href="projects.html" style="color: orangered;">Projects</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <div class="projects-container">
+    <h1 class="section-title">My Projects</h1>
+
+    <div class="projects-grid">
+      <!-- Portfolio Project -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="C:\Users\RISHALU VENKATESAN\OneDrive\Desktop\IT PROJECT\portfolio.png" alt="Portfolio Website">
+          <div class="project-overlay">
+            <span class="project-tech">HTML • CSS • JavaScript</span>
+          </div>
+        </div>
+        <div class="project-content">
+          <span class="project-status status-completed">Completed</span>
+          <h3 class="project-title">Portfolio Website</h3>
+          <p class="project-description">
+            A responsive personal portfolio website showcasing my skills, projects, and experience. 
+            Designed with a modern UI and smooth animations for better user experience.
+          </p>
+          <a href="#" class="project-btn">View Project</a>
+        </div>
+      </div>
+
+      <!-- Hospital Management Project -->
+      <div class="project-card">
+        <div class="project-image">
+          <img src="C:\Users\RISHALU VENKATESAN\OneDrive\Desktop\IT PROJECT\hospital.png" alt="Hospital Management System">
+          <div class="project-overlay">
+            <span class="project-tech">Python • SQL • Reactjs</span>
+          </div>
+        </div>
+        <div class="project-content">
+          <span class="project-status status-development">In Development</span>
+          <h3 class="project-title">Hospital Database Management</h3>
+          <p class="project-description">
+            A comprehensive database management system for hospitals to manage patient records, 
+            appointments, and medical staff. Features secure data handling and intuitive interface.
+          </p>
+          <a href="#" class="project-btn">View Details</a>
+        </div>
+      </div>
+
+      <!-- Upcoming Project -->
+      <div class="project-card">
+        <div class="coming-soon">
+          <i class='bx bx-loader-circle'></i>
+          <h3>Exciting Project Coming Soon</h3>
+          <p>I'm working on something amazing. Stay tuned for updates!</p>
+        </div>
+        <div class="project-content">
+          <span class="project-status status-upcoming">Coming Soon</span>
+          <h3 class="project-title">New Project</h3>
+          <p class="project-description">
+            This space is reserved for my next innovative project. Currently in planning phase.
+          </p>
+          <a href="#" class="project-btn" style="opacity: 0.7; pointer-events: none;">Not Available</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <div class="footer-left">
+      <a href="#about">Shreya</a>
+      <a href="#contact">Contact</a>
+      <a href="#privacy">Privacy Policy</a>
+    </div>
+    <div class="footer-right">
+      <p>© Shreya 2024 | copyrights | 2024506093</p>
+    </div>
+  </footer>
+</body>
+</html>
